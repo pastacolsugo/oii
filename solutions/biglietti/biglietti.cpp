@@ -7,42 +7,25 @@ int min (int a, int b) {
 
 
 int main() {
-    FILE *fin, *fout;
-    fin=fopen("input.txt","r");
-    fout=fopen("output.txt","w");
-    if(fin==NULL||fout==NULL) {
-        printf("errore nell'apertura del file");
-        return 0;
-    }
+    freopen ("input.txt", "r", stdin);
+    freopen ("output.txt", "w", stdout);
 
     int N, M, A, B;
-    fscanf (fin, "%d%d%d%d", &N, &M, &A, &B);
-    int solobiglietti=N*A;
+    
+    scanf ("%d%d%d%d", &N, &M, &A, &B);
+    
     int solocarnet, carnetbiglietti;
-    solocarnet=((N/M))*B;
-    if(N%M!=0) {
-        solocarnet=solocarnet+B;
+    int solobiglietti = N*A;
+    solocarnet = ((N/M))*B;
+    
+    if (N%M != 0){
+        solocarnet = solocarnet+B;
     }
-    carnetbiglietti=(N/M)*B+(N%M)*A; /*con N%M trovo le corse mancanti*/
-    fprintf (fout, "%d", min(min(solobiglietti, solocarnet), carnetbiglietti));
-    /*if (solobiglietti<solocarnet) {
-        if (solobiglietti<carnetbiglietti){
-            fprintf (fout,"%d", solobiglietti);
-            }
-    else {fprintf (fout,"%d", carnetbiglietti);
-    }
-    }
-    else {
-    if (solocarnet<carnetbiglietti){
-        fprintf (fout,"%d", solocarnet);
-    }
-    else {
-        fprintf (fout,"d", carnetbiglietti);
-
-    }
-     }*/
-    fclose(fin);
-    fclose(fout);
+ 
+    carnetbiglietti = (N/M)*B + (N%M)*A;
+    
+    printf ("%d", min(min(solobiglietti, solocarnet), carnetbiglietti));
+    
     return 0;
 }
 
